@@ -15,4 +15,20 @@ async function getForms(req, res) {
   }
 }
 
-module.exports = { getForms };
+async function getSingleForm(req, res) {
+  try {
+    const form = await formService.getFormById(req.params.id);
+    return res.send({
+      success: true,
+      data: form,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+module.exports = { getForms, getSingleForm };

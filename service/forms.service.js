@@ -9,4 +9,16 @@ async function getAllForms() {
   }
 }
 
-module.exports = { getAllForms };
+async function getFormById(id) {
+  try {
+    const questionnaires = await Questionnaire.find({ _id: id }, [
+      "formName",
+      "formElements",
+    ]);
+    return questionnaires;
+  } catch (err) {
+    throw err;
+  }
+}
+
+module.exports = { getAllForms, getFormById };
