@@ -1,0 +1,30 @@
+{
+    "samples":[
+        {
+            "formName": "Name email form",
+            "formElements": [
+              {
+                "fieldName": "Full name",
+                "constraint": "SHORT_TEXT"
+              },
+              {
+                "fieldName": "Email",
+                "constraint": "VALID_EMAIL"
+              }
+            ]
+          },
+          {
+            "formName": "Name phone form",
+            "formElements": [
+              {
+                "fieldName": "Full name",
+                "constraint": "SHORT_TEXT"
+              },
+              {
+                "fieldName": "Phone number",
+                "constraint": "PHONE_NUMBER"
+              }
+            ]
+          }
+    ]
+}

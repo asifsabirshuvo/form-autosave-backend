@@ -1,5 +1,14 @@
 const Questionnaire = require("./../models/Questionnaire");
 
+async function insertFormsBatch(forms) {
+  try {
+    const questionnaires = await Questionnaire.insertMany(forms);
+    return questionnaires;
+  } catch (err) {
+    throw err;
+  }
+}
+
 async function getAllForms() {
   try {
     const questionnaires = await Questionnaire.find({}, ["formName"]);
@@ -21,4 +30,4 @@ async function getFormById(id) {
   }
 }
 
-module.exports = { getAllForms, getFormById };
+module.exports = { getAllForms, getFormById, insertFormsBatch };

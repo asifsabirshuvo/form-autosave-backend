@@ -8,14 +8,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 require("dotenv").config();
 const { mongoose } = require("./db/connection");
-const formGenerationController = require("./controllers/formGeneration.controller");
 const formsRoute = require("./routes/forms.route");
 
 app.get("/api/v1/health", async (req, res) => {
   res.status(200).send("form api is running and healthy.");
 });
 
-app.get("/api/v1/generate", formGenerationController.generateForm);
 app.use("/api/v1/forms", formsRoute);
 
 //default error routers
