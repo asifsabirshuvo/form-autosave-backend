@@ -9,12 +9,14 @@ app.use(bodyParser.raw());
 require("dotenv").config();
 const { mongoose } = require("./db/connection");
 const formGenerationController = require("./controllers/formGeneration.controller");
+const formsRoute = require("./routes/forms.route");
 
 app.get("/api/v1/health", async (req, res) => {
   res.status(200).send("form api is running and healthy.");
 });
 
 app.get("/api/v1/generate", formGenerationController.generateForm);
+app.use("/api/v1/forms", formsRoute);
 
 //default error routers
 app.use((req, res) => {
@@ -24,5 +26,3 @@ app.use((req, res) => {
 app.listen(process.env.API_PORT, () => {
   console.log(`server running on ${process.env.API_PORT} PORT`);
 });
-
-module.exports = { app };
