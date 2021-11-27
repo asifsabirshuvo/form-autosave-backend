@@ -1,3 +1,8 @@
+/*
+  dynamic field suggestions for the users
+  everytime we add a new input option we can hardcode it here.
+  Ingored keeping them in another schema for time constraints.
+*/
 const formFieldValidationMap = {
   VALID_EMAIL: isValidEmail,
   SHORT_TEXT: isShortText,
@@ -10,6 +15,7 @@ function validateFields(fieldModel, fields) {
     fieldModelMap[fieldElement.fieldName] = fieldElement.constraint;
   }
 
+  //checking malformed field names
   for (const field of fields) {
     if (!fieldModelMap[field.fieldName]) {
       return {
@@ -19,23 +25,21 @@ function validateFields(fieldModel, fields) {
     }
   }
 
+  //checking field constraints
+  for (const field of fields) {
+    const valueValidation = formFieldValidationMap[
+      fieldModelMap[field.fieldName]
+    ](field.value);
+
+    if (!valueValidation.success) {
+      return valueValidation;
+    }
+  }
+
   return {
     success: true,
-    message: "All field names are valid.",
+    message: "All field names and data are valid.",
   };
-}
-
-function validateFormField(type, data) {
-  switch (type) {
-    case VALID_EMAIL:
-      return isValidEmail(data);
-    case SHORT_TEXT:
-      return isShortText(data);
-    case PHONE_NUMBER:
-      return isPhoneNumber(data);
-    default:
-      return false;
-  }
 }
 
 function isShortText(data) {
@@ -46,7 +50,7 @@ function isShortText(data) {
   };
 }
 function isValidEmail(data) {
-  const success = data.match(/\S+@\S+\.\S+/);
+  const success = data.match(/\S+@\S+\.\S+/) !== null;
   return {
     success,
     message: !success ? "Invalid email" : "",

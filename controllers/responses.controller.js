@@ -12,7 +12,7 @@ async function submitForm(req, res) {
     );
 
     if (!fieldValidationResults.success) {
-      return fieldValidationResults;
+      return res.status(400).send(fieldValidationResults);
     }
 
     const responseSubmitted = await responseService.saveQuestionnaireResponse(

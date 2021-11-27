@@ -11,7 +11,7 @@ const { mongoose } = require("./db/connection");
 const formsRoute = require("./routes/forms.route");
 const responsesRoute = require("./routes/responses.route");
 
-app.get("/api/v1/health", async (req, res) => {
+app.get("/api/v1/health", (req, res) => {
   res.status(200).send("form api is running and healthy.");
 });
 
