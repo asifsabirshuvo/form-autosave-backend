@@ -1,4 +1,4 @@
-const Questionnaire = require("./../models/Questionnaire");
+const Questionnaire = require("../models/Questionnaire.model");
 
 async function insertFormsBatch(forms) {
   try {
