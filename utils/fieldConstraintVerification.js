@@ -1,3 +1,30 @@
+const formFieldValidationMap = {
+  VALID_EMAIL: isValidEmail,
+  SHORT_TEXT: isShortText,
+  PHONE_NUMBER: isPhoneNumber,
+};
+
+function validateFields(fieldModel, fields) {
+  let fieldModelMap = {};
+  for (const fieldElement of fieldModel) {
+    fieldModelMap[fieldElement.fieldName] = fieldElement.constraint;
+  }
+
+  for (const field of fields) {
+    if (!fieldModelMap[field.fieldName]) {
+      return {
+        success: false,
+        message: `FieldName ${field.fieldName} is invalid for the form.`,
+      };
+    }
+  }
+
+  return {
+    success: true,
+    message: "All field names are valid.",
+  };
+}
+
 function validateFormField(type, data) {
   switch (type) {
     case VALID_EMAIL:
@@ -33,4 +60,4 @@ function isPhoneNumber(data) {
   };
 }
 
-module.exports = { validateFormField };
+module.exports = { validateFields };

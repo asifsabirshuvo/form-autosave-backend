@@ -20,7 +20,7 @@ async function getAllForms() {
 
 async function getFormById(id) {
   try {
-    const questionnaires = await Questionnaire.find({ _id: id }, [
+    const questionnaires = await Questionnaire.findOne({ _id: id }, [
       "formName",
       "formElements",
     ]);
