@@ -1,7 +1,16 @@
 const express = require("express");
 const responsesRoute = express.Router();
-const formController = require("../controllers/responses.controller");
+const responseController = require("../controllers/responses.controller");
+const {
+  submitFormValidator,
+  validate,
+} = require("./../validators/submitForm.validator");
 
-responsesRoute.post("/", formController.submitForm);
+responsesRoute.post(
+  "/",
+  submitFormValidator(),
+  validate,
+  responseController.submitForm
+);
 
 module.exports = responsesRoute;

@@ -16,7 +16,7 @@ app.get("/api/v1/health", async (req, res) => {
 });
 
 app.use("/api/v1/forms", formsRoute);
-app.use("/api/v1/responses", responses);
+app.use("/api/v1/responses", responsesRoute);
 
 //default error routers
 app.use((req, res) => {

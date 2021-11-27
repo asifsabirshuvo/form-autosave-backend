@@ -6,10 +6,7 @@ const QuestionnaireResponseSchema = new Schema({
     type: Schema.ObjectId,
     auto: true,
   },
-  formName: {
-    type: String,
-    required: true,
-  },
+  form: { type: mongoose.Schema.Types.ObjectId, ref: "Questionnaire" },
   formElements: [
     {
       fieldName: {
