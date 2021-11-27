@@ -9,9 +9,13 @@ async function insertFormsBatch(forms) {
   }
 }
 
-async function getAllForms() {
+async function getAllForms(page, limit) {
   try {
-    const questionnaires = await Questionnaire.find({}, ["formName"]);
+    let query = {};
+    query.skip = limit * (page - 1);
+    query.limit = limit;
+    query.sort = { _id: -1 };
+    const questionnaires = await Questionnaire.find({}, ["formName"], query);
     return questionnaires;
   } catch (err) {
     throw err;

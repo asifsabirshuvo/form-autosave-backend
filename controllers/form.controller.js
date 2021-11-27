@@ -21,7 +21,12 @@ async function generateForm(req, res) {
 
 async function getForms(req, res) {
   try {
-    const forms = await formService.getAllForms();
+    const page = parseInt(req.query.page ? req.query.page : 1);
+    const limit = parseInt(
+      req.query.limit ? (req.query.limit <= 10 ? req.query.limit : 10) : 10
+    );
+
+    const forms = await formService.getAllForms(page, limit);
     return res.send({
       success: true,
       data: forms,
