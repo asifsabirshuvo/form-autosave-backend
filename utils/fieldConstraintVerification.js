@@ -57,7 +57,7 @@ function isValidEmail(data) {
   };
 }
 function isPhoneNumber(data) {
-  const success = Number.isInteger(data);
+  const success = data.match(/^\d+$/) != null;
   return {
     success,
     message: !success ? "Invalid phone number" : "",
