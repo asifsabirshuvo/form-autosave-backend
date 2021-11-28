@@ -60,7 +60,7 @@ function isPhoneNumber(data) {
   const success = Number.isInteger(data);
   return {
     success,
-    message: !success ? "Invalid string type or length more than 20" : "",
+    message: !success ? "Invalid phone number" : "",
   };
 }
 
